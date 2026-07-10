@@ -39,6 +39,15 @@ export default function Home() {
 
   const uploadFile = async (file: File) => {
     setError(null);
+    const okType = file.type === "application/pdf" || file.type.startsWith("image/");
+    if (!okType) {
+      setError("Please upload a PDF or an image (PNG/JPG). That file type isn't supported.");
+      return;
+    }
+    if (file.size > 15 * 1024 * 1024) {
+      setError("That file is over 15 MB. Try a smaller scan or a photo.");
+      return;
+    }
     setBusy(true);
     try {
       const fd = new FormData();
