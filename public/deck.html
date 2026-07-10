@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InvoiceReady pitch</title>
+    <style>
+      :root {
+        --bg: #070b18;
+        --fg: #e5e9f2;
+        --muted: #94a3b8;
+        --b1: #6366f1;
+        --b2: #8b5cf6;
+        --b3: #d946ef;
+        --card: rgba(23, 30, 51, 0.55);
+        --card-border: rgba(148, 163, 184, 0.16);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        overflow: hidden;
+        position: relative;
+      }
+      body::before {
+        content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        background:
+          radial-gradient(60% 45% at 50% -8%, rgba(139, 92, 246, 0.3), transparent 70%),
+          radial-gradient(45% 40% at 85% 5%, rgba(217, 70, 239, 0.18), transparent 70%),
+          radial-gradient(40% 40% at 12% 10%, rgba(59, 130, 246, 0.2), transparent 70%);
+      }
+      body::after {
+        content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        background-image:
+          linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+        background-size: 46px 46px;
+        -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
+        mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
+      }
+      .grad {
+        background: linear-gradient(100deg, var(--b1), var(--b2) 45%, var(--b3));
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .stage { position: relative; z-index: 1; height: 100%; display: grid; place-items: center; padding: 6vh 8vw; }
+      .slide {
+        display: none; width: 100%; max-width: 960px; animation: fade 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .slide.active { display: block; }
+      @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+      .kicker {
+        display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 600;
+        letter-spacing: 0.04em; color: #c7d2fe; border: 1px solid var(--card-border);
+        background: var(--card); padding: 0.4rem 0.9rem; border-radius: 999px; margin-bottom: 1.4rem;
+      }
+      .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--b2); box-shadow: 0 0 0 4px rgba(139,92,246,0.25); }
+      h1 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; }
+      h2 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #f4f6fb; }
+      .lead { font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: #dbe2f0; margin-top: 1.2rem; line-height: 1.5; max-width: 44ch; }
+      .muted { color: var(--muted); }
+      .big { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; letter-spacing: -0.02em; }
+
+      .cards { display: grid; gap: 1rem; margin-top: 2rem; }
+      .cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .card {
+        background: var(--card); border: 1px solid var(--card-border); border-radius: 18px; padding: 1.4rem;
+        backdrop-filter: blur(10px);
+      }
+      .card .ico { font-size: 1.6rem; }
+      .card h3 { font-size: 1.15rem; margin: 0.6rem 0 0.35rem; }
+      .card p { color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.2rem; align-items: stretch; }
+      .step .n { font-size: 0.85rem; font-weight: 700; color: var(--b2); }
+      ul.check { margin-top: 1.6rem; list-style: none; display: grid; gap: 0.9rem; }
+      ul.check li { font-size: clamp(1rem, 2vw, 1.35rem); display: flex; gap: 0.8rem; align-items: baseline; }
+      ul.check li::before { content: "✓"; color: #34d399; font-weight: 800; }
+      .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+      .stat { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.2rem; text-align: center; }
+      .stat .v { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800; }
+      .stat .k { color: var(--muted); font-size: 0.82rem; margin-top: 0.3rem; }
+      .url { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #c7d2fe; }
+      a { color: #c7d2fe; }
+      .flow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); font-size: 1rem; margin-top: 1.4rem; }
+
+      /* chrome */
+      .bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--b1), var(--b3)); z-index: 3; transition: width 0.4s ease; }
+      .counter { position: fixed; bottom: 1.1rem; right: 1.4rem; z-index: 3; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+      .hint { position: fixed; bottom: 1.1rem; left: 1.4rem; z-index: 3; color: var(--muted); font-size: 0.8rem; }
+      .nav { position: fixed; inset: 0; z-index: 2; display: flex; }
+      .nav button { flex: 1; background: none; border: 0; cursor: pointer; }
+      .nav .prev { flex: 0 0 30%; }
+      @media (max-width: 760px) {
+        .cols-3, .cols-2, .steps, .stat-row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar" id="bar"></div>
+    <div class="stage" id="stage">
+      <!-- 1: Title -->
+      <section class="slide active">
+        <div class="kicker"><span class="dot"></span> EN 16931 · UBL 2.1 · Peppol BIS 3.0</div>
+        <h1><span class="grad">InvoiceReady</span></h1>
+        <p class="lead">Turn any invoice, even a photo, into a legally compliant EU e-invoice in 30 seconds.</p>
+        <p class="muted url" style="margin-top:2rem">invoiceready-air-slate.vercel.app</p>
+      </section>
+
+      <!-- 2: Problem -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> The problem</div>
+        <h2>In 2026 your invoice stops being legal.</h2>
+        <p class="lead">
+          E-invoicing mandates are going live across the EU: Poland (KSeF), Belgium, France and more.
+          They require structured formats, not PDFs or Word and Excel files.
+        </p>
+        <div class="stat-row">
+          <div class="stat"><div class="v grad">10M+</div><div class="k">SMBs with no ERP</div></div>
+          <div class="stat"><div class="v grad">2026+</div><div class="k">mandates going live</div></div>
+          <div class="stat"><div class="v grad">0</div><div class="k">easy tools for them</div></div>
+        </div>
+      </section>
+
+      <!-- 3: Solution -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> The solution</div>
+        <h2>Drop it in. Get a compliant e-invoice out.</h2>
+        <p class="lead">
+          A clean PDF, a scan, or a phone photo goes in. A valid EN 16931 UBL file comes out, with
+          plain-language checks a non-accountant can understand and fix.
+        </p>
+        <div class="flow">drop &nbsp;→&nbsp; review &nbsp;→&nbsp; done</div>
+      </section>
+
+      <!-- 4: How it works -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> How it works</div>
+        <h2>Three steps, thirty seconds.</h2>
+        <div class="steps">
+          <div class="card step"><div class="n">STEP 1</div><h3>Drop</h3><p>Upload any invoice or try a built-in sample. Files are never stored.</p></div>
+          <div class="card step"><div class="n">STEP 2</div><h3>Review</h3><p>Edit extracted fields. Issues are flagged inline in human language, red and amber.</p></div>
+          <div class="card step"><div class="n">STEP 3</div><h3>Done</h3><p>Download valid UBL 2.1 XML with a human-readable preview.</p></div>
+        </div>
+      </section>
+
+      <!-- 5: Trust / under the hood -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> Why you can trust it</div>
+        <h2>AI reads. Rules decide.</h2>
+        <p class="lead">
+          The model only extracts data. Whether an invoice is compliant is decided by a deterministic
+          rule engine, never by the model. Predictable, auditable, testable.
+        </p>
+        <div class="cards cols-2">
+          <div class="card"><div class="ico">🧠</div><h3>AI extraction</h3><p>Claude vision reads PDFs, scans and photos into structured data.</p></div>
+          <div class="card"><div class="ico">⚖️</div><h3>Deterministic EN 16931</h3><p>Required fields, VAT ids and every amount checked in code, with unit tests.</p></div>
+        </div>
+      </section>
+
+      <!-- 6: Why it wins -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> Why it wins</div>
+        <h2>Built for the people the mandate forgot.</h2>
+        <ul class="check">
+          <li>No ERP, no setup. It runs in the browser.</li>
+          <li>Private by design. Your file is never stored.</li>
+          <li>Standards-native: EN 16931, UBL 2.1, Peppol BIS 3.0.</li>
+          <li>From photo to compliant XML in about 30 seconds.</li>
+        </ul>
+      </section>
+
+      <!-- 7: Proof -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> Proof</div>
+        <h2>Not a mockup. It works.</h2>
+        <p class="lead">
+          Live on Vercel with three sample invoices. Arithmetic and XML generation are unit-tested,
+          and output is checked against official OpenPEPPOL examples.
+        </p>
+        <div class="stat-row">
+          <div class="stat"><div class="v grad">45</div><div class="k">unit tests passing</div></div>
+          <div class="stat"><div class="v grad">5</div><div class="k">EU invoice types covered</div></div>
+          <div class="stat"><div class="v grad">Live</div><div class="k">deployed and public</div></div>
+        </div>
+      </section>
+
+      <!-- 8: Close -->
+      <section class="slide">
+        <div class="kicker"><span class="dot"></span> Try it now</div>
+        <h1 style="font-size:clamp(2rem,5vw,3.4rem)">Any invoice in.<br /><span class="grad">Compliant e-invoice out.</span></h1>
+        <p class="lead">Open it, drop a sample, download the XML.</p>
+        <p class="url big" style="margin-top:1.6rem">invoiceready-air-slate.vercel.app</p>
+      </section>
+    </div>
+
+    <div class="nav">
+      <button class="prev" onclick="go(-1)" aria-label="Previous"></button>
+      <button onclick="go(1)" aria-label="Next"></button>
+    </div>
+    <div class="counter"><span id="cur">1</span> / <span id="tot">8</span></div>
+    <div class="hint">← → to navigate</div>
+
+    <script>
+      const slides = [...document.querySelectorAll(".slide")];
+      let i = 0;
+      document.getElementById("tot").textContent = slides.length;
+      function render() {
+        slides.forEach((s, n) => s.classList.toggle("active", n === i));
+        document.getElementById("cur").textContent = i + 1;
+        document.getElementById("bar").style.width = ((i + 1) / slides.length) * 100 + "%";
+      }
+      function go(d) { i = Math.min(slides.length - 1, Math.max(0, i + d)); render(); }
+      addEventListener("keydown", (e) => {
+        if (["ArrowRight", "ArrowDown", " ", "PageDown"].includes(e.key)) { e.preventDefault(); go(1); }
+        if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); go(-1); }
+        if (e.key === "Home") { i = 0; render(); }
+        if (e.key === "End") { i = slides.length - 1; render(); }
+      });
+      let x0 = null;
+      addEventListener("touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
+      addEventListener("touchend", (e) => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+        x0 = null;
+      });
+      render();
+    </script>
+  </body>
+</html>
