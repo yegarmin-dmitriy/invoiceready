@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# InvoiceReady
 
-## Getting Started
+**Turn any invoice — even a photo — into a legally compliant EU e-invoice in 30 seconds.**
 
-First, run the development server:
+Live demo: **https://invoiceready-hwz8p2ftq-air-slate.vercel.app**
+
+Built for AI Build Day (24h hackathon). Category: Product.
+
+---
+
+## The problem
+
+EU e-invoicing mandates are arriving fast — Poland (KSeF), Belgium, France and more from 2026 onward. They require structured formats like **EN 16931 / UBL 2.1**, not PDFs or Word/Excel documents. Millions of SMBs without an ERP suddenly have invoices that are no longer legally valid, and no easy way to fix that.
+
+InvoiceReady takes any invoice — a clean PDF, a scan, or a phone photo — and produces a structured, standards-compliant e-invoice, with plain-language validation so a non-accountant can understand and fix any issues.
+
+## How it works
+
+1. **Drop** an invoice (PDF / image) or pick a built-in sample.
+2. **Review** the extracted data in an editable form. Deterministic EN 16931 checks flag problems inline (🔴 errors / 🟡 warnings) in human language.
+3. **Done** — download a valid UBL 2.1 XML and see a human-readable preview.
+
+The AI only *extracts* data. Whether the invoice is compliant is decided by a **deterministic rule engine**, never by the model — so results are predictable and auditable.
+
+## Architecture
+
+Stateless Next.js (App Router, TypeScript, Tailwind) on Vercel. No database, no auth, and **uploaded files are never stored** — privacy is a feature.
+
+| Module | Responsibility |
+| --- | --- |
+| [`lib/types.ts`](lib/types.ts) | Zod invoice model (parties, lines, totals) — the EN 16931 field subset |
+| [`lib/validate.ts`](lib/validate.ts) | Deterministic EN 16931 rules: required fields, line & document arithmetic, VAT id format. Returns `{severity, field, rule, message}` |
+| [`lib/ubl.ts`](lib/ubl.ts) | UBL 2.1 Invoice XML generator (Peppol BIS Billing 3.0) |
+| [`lib/extract.ts`](lib/extract.ts) | Claude vision extraction via the LiteLLM OpenAI-compatible endpoint |
+| [`lib/samples.ts`](lib/samples.ts) | Three synthetic sample invoices (all data fictional) |
+| [`app/api/extract/route.ts`](app/api/extract/route.ts) | `POST` returns `{ invoice }`; mock mode serves samples |
+| [`app/page.tsx`](app/page.tsx) | The Drop → Review → Done single-page flow |
+
+## Running locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev:mock   # runs with EXTRACT_MOCK=1 — no AI key needed, uses samples
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Use **Try a sample** or drop a file (in mock mode any dropped file returns the clean sample).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Arithmetic and XML generation are covered by unit tests:
 
-## Learn More
+```bash
+npm test
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Extraction talks to an OpenAI-compatible LiteLLM endpoint. Credentials live in environment variables only — never in code.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Purpose |
+| --- | --- |
+| `EXTRACT_MOCK` | Set to `1` to skip the AI call and return built-in samples |
+| `LITELLM_API_KEY` | LiteLLM API key |
+| `LITELLM_BASE_URL` | LiteLLM base URL (OpenAI-compatible) |
+| `LITELLM_MODEL` | Optional model override (default `claude-sonnet-5`) |
 
-## Deploy on Vercel
+## Compliance scope
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+MVP targets the pan-European **EN 16931** semantic model serialised as **UBL 2.1** with the **Peppol BIS Billing 3.0** customization. National formats (e.g. KSeF FA(3), Factur-X) are out of scope for the hackathon. Generated XML is intended to be checked against an open EN 16931 validator.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- All sample and fixture data is **synthetic** — no real company or customer data.
+- User-facing text and commits are in English.
