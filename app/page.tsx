@@ -74,14 +74,35 @@ export default function Home() {
     <div className="flex flex-1 flex-col items-center px-4 py-10 sm:py-14">
       {/* Header */}
       <header className="mb-10 w-full max-w-3xl text-center">
-        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
           EN 16931 · UBL 2.1 · Peppol BIS 3.0
         </div>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">InvoiceReady</h1>
-        <p className="mx-auto mt-3 max-w-xl text-slate-600 dark:text-slate-400">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">InvoiceReady</h1>
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
           Turn any invoice — even a photo — into a legally compliant EU e-invoice in 30 seconds.
-          EU e-invoicing mandates are arriving; Word and Excel invoices won&apos;t count.
         </p>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+          E-invoicing mandates are going live across the EU — Poland (KSeF), Belgium and France from
+          2026. They require structured formats, not PDFs. Millions of small businesses on Word and
+          Excel suddenly have invoices that no longer count. InvoiceReady fixes that in one step.
+        </p>
+        <dl className="mx-auto mt-6 grid max-w-xl grid-cols-3 gap-3 text-center">
+          {[
+            ["2026+", "EU mandates going live"],
+            ["EN 16931", "the required standard"],
+            ["0 files stored", "runs privately"],
+          ].map(([big, small]) => (
+            <div
+              key={big}
+              className="rounded-xl border border-slate-200 bg-white/60 px-2 py-3 dark:border-slate-800 dark:bg-slate-900/50"
+            >
+              <dt className="text-sm font-semibold sm:text-base">{big}</dt>
+              <dd className="mt-0.5 text-[11px] leading-tight text-slate-500 dark:text-slate-400">
+                {small}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </header>
 
       {/* Step indicator */}
