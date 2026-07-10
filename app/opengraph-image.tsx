@@ -56,7 +56,7 @@ export default function OpengraphImage() {
           compliant Peppol e-invoice in 30 seconds.
         </div>
         <div style={{ display: "flex", marginTop: 40, fontSize: 28, color: "#94a3b8" }}>
-          Mandatory in Belgium from January 2026 (Peppol), with more of the EU to follow
+          Going mandatory across the EU: Germany, Belgium, Poland, France and Italy
         </div>
       </div>
     ),

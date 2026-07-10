@@ -89,14 +89,14 @@ export default function Home() {
           seconds.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-          E-invoicing is becoming mandatory across the EU. Belgium requires structured Peppol invoices
-          for all B2B from January 2026, and Poland&apos;s KSeF and others are rolling out too. A PDF
-          or an Excel file no longer counts. InvoiceReady turns what you already have into a
-          Peppol-ready e-invoice, built on the EU EN 16931 standard.
+          E-invoicing is going mandatory across the EU. Germany already requires businesses to receive
+          structured invoices, Belgium mandates Peppol for all B2B from January 2026, and Poland,
+          France and Italy are rolling out too. A PDF or an Excel file no longer counts. InvoiceReady
+          turns what you already have into a Peppol-ready e-invoice, built on the EU EN 16931 standard.
         </p>
         <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 gap-3 text-center">
           {[
-            ["Jan 2026", "Belgium B2B goes mandatory"],
+            ["EU-wide", "mandates 2025 to 2028"],
             ["Peppol BIS", "the format we generate"],
             ["0 files stored", "runs privately"],
           ].map(([big, small]) => (

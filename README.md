@@ -10,7 +10,7 @@ Built for AI Build Day (24h hackathon). Category: Product.
 
 ## The problem
 
-E-invoicing is becoming mandatory across the EU. Belgium requires structured **Peppol BIS 3.0** invoices for all B2B from January 2026, and Poland's KSeF and others are rolling out through 2026 and 2027. These mandates require structured formats built on **EN 16931**, not PDFs or Word/Excel documents. Businesses still invoicing in Word, Excel or PDF, and without an ERP, need a structured format and an easy way to produce it.
+E-invoicing is going mandatory across the EU. Germany already requires businesses to receive structured invoices, Belgium mandates **Peppol BIS 3.0** for all B2B from January 2026, and Poland (KSeF), France and Italy are rolling out through 2026 to 2028. These mandates require structured formats built on **EN 16931**, not PDFs or Word/Excel documents. Businesses still invoicing in Word, Excel or PDF, and without an ERP, need a structured format and an easy way to produce it.
 
 InvoiceReady takes any invoice (a clean PDF, a scan, or a phone photo) and produces a structured, standards-compliant e-invoice, with plain-language validation so a non-accountant can understand and fix any issues.
 
