@@ -44,6 +44,8 @@ export const TotalsSchema = z.object({
 
 export const InvoiceSchema = z.object({
   invoiceNumber: z.string().default(""),
+  /** Buyer reference / purchase order (BT-10). Peppol requires one of these. */
+  buyerReference: z.string().default(""),
   /** Issue date, ISO "YYYY-MM-DD". */
   issueDate: z.string().default(""),
   /** Payment due date, ISO "YYYY-MM-DD". */

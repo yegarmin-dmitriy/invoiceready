@@ -29,9 +29,30 @@ function taxCategory(rate: number): string {
   return rate > 0 ? "S" : "Z";
 }
 
+/**
+ * Peppol Electronic Address Scheme (EAS) code per country VAT scheme, used for
+ * the party EndpointID (BT-34 / BT-49). Best-effort mapping for the countries
+ * we handle; unknown countries fall back to the German VAT scheme code so the
+ * schemeID stays inside the EAS code list.
+ */
+const EAS_BY_COUNTRY: Record<string, string> = {
+  DE: "9930",
+  FR: "9957",
+  NL: "9944",
+  BE: "9925",
+  PL: "9945",
+};
+
+function endpoint(party: Invoice["seller"]): { scheme: string; value: string } {
+  const scheme = EAS_BY_COUNTRY[party.country.trim().toUpperCase()] ?? "9930";
+  return { scheme, value: party.vatId };
+}
+
 function partyBlock(party: Invoice["seller"], currency: string): string {
   void currency;
+  const ep = endpoint(party);
   return `    <cac:Party>
+      <cbc:EndpointID schemeID="${esc(ep.scheme)}">${esc(ep.value)}</cbc:EndpointID>
       <cac:PostalAddress>
         <cbc:StreetName>${esc(party.address)}</cbc:StreetName>
         <cbc:CityName>${esc(party.city)}</cbc:CityName>
@@ -114,6 +135,7 @@ export function toUBL(invoice: Invoice): string {
   <cbc:DueDate>${esc(invoice.dueDate)}</cbc:DueDate>
   <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
   <cbc:DocumentCurrencyCode>${esc(c)}</cbc:DocumentCurrencyCode>
+  <cbc:BuyerReference>${esc(invoice.buyerReference || invoice.invoiceNumber)}</cbc:BuyerReference>
   <cac:AccountingSupplierParty>
 ${partyBlock(invoice.seller, c)}
   </cac:AccountingSupplierParty>

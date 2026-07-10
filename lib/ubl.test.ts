@@ -125,6 +125,34 @@ describe("toUBL: tax breakdown", () => {
   });
 });
 
+describe("toUBL: Peppol-required identifiers", () => {
+  test("always emits a BuyerReference, falling back to the invoice number", () => {
+    const xml = toUBL(baseInvoice());
+    expect(xml).toContain("<cbc:BuyerReference>INV-2026-001</cbc:BuyerReference>");
+  });
+
+  test("prefers an explicit buyerReference when present", () => {
+    const xml = toUBL(baseInvoice({ buyerReference: "PO-778" }));
+    expect(xml).toContain("<cbc:BuyerReference>PO-778</cbc:BuyerReference>");
+  });
+
+  test("emits seller and buyer EndpointID with an EAS schemeID and the VAT value", () => {
+    const xml = toUBL(baseInvoice());
+    // seller PL -> EAS 9945, buyer DE -> EAS 9930
+    expect(xml).toContain('<cbc:EndpointID schemeID="9945">PL5252445997</cbc:EndpointID>');
+    expect(xml).toContain('<cbc:EndpointID schemeID="9930">DE811569869</cbc:EndpointID>');
+  });
+
+  test("places BuyerReference after DocumentCurrencyCode and before the supplier party", () => {
+    const xml = toUBL(baseInvoice());
+    const cur = xml.indexOf("<cbc:DocumentCurrencyCode>");
+    const ref = xml.indexOf("<cbc:BuyerReference>");
+    const sup = xml.indexOf("<cac:AccountingSupplierParty>");
+    expect(cur).toBeLessThan(ref);
+    expect(ref).toBeLessThan(sup);
+  });
+});
+
 describe("toUBL: escaping", () => {
   test("escapes XML special characters in text values", () => {
     const inv = baseInvoice();
