@@ -80,5 +80,21 @@ stress-test the extractor on a genuine hybrid PDF.
 | `facturx-invoice_EN16931.pdf` | akretion/factur-x fixtures | real French Factur-X hybrid PDF (EN 16931) |
 
 The Peppol/UBL XML files are the target our [`lib/ubl.ts`](../lib/ubl.ts) output
-should resemble. Validate generated XML against an open EN 16931 validator
-(for example the ecosio or Peppol online validator) before the freeze.
+should resemble.
+
+## Standards validation
+
+[`validate.mts`](validate.mts) runs our generated UBL through the **official**
+EN 16931 (CEN) and Peppol BIS 3.0 Schematron rule sets, the same rules public
+validators use. It renders each synthetic invoice with `lib/ubl.ts` and executes
+the official XSLT via Saxon-JS.
+
+```bash
+npx tsx samples/validate.mts
+```
+
+Current result: all five invoices pass **CEN EN 16931** with zero errors and
+zero warnings. Four of five also pass the stricter **Peppol BIS 3.0**; the
+Netherlands sample trips `NL-R-007` (a Dutch national rule that requires
+`cac:PaymentMeans`), which is the known IBAN/payment-means gap in `lib/ubl.ts`.
+The rule files are cached under `samples/.validator` (git-ignored).

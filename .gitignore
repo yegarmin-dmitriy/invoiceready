@@ -44,3 +44,4 @@ next-env.d.ts
 samples/synthetic/*.png
 samples/synthetic/*.jpg
 samples/synthetic/*.pdf
+samples/.validator/

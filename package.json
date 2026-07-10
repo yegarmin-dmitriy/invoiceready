@@ -28,6 +28,7 @@
     "pdf-lib": "^1.17.1",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "xslt3": "^2.7.0"
   }
 }
