@@ -74,11 +74,17 @@ export default function Home() {
     <div className="flex flex-1 flex-col items-center px-4 py-10 sm:py-14">
       {/* Header */}
       <header className="mb-10 w-full max-w-3xl text-center">
-        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+        <div className="glass mb-4 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide text-indigo-600 dark:text-indigo-300">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-500 opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-indigo-500" />
+          </span>
           EN 16931 · UBL 2.1 · Peppol BIS 3.0
         </div>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">InvoiceReady</h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
+        <h1 className="brand-gradient-text text-5xl font-extrabold tracking-tight sm:text-6xl">
+          InvoiceReady
+        </h1>
+        <p className="mx-auto mt-5 max-w-2xl text-lg font-medium text-slate-700 sm:text-xl dark:text-slate-200">
           Turn any invoice — even a photo — into a legally compliant EU e-invoice in 30 seconds.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
@@ -86,18 +92,15 @@ export default function Home() {
           2026. They require structured formats, not PDFs. Millions of small businesses on Word and
           Excel suddenly have invoices that no longer count. InvoiceReady fixes that in one step.
         </p>
-        <dl className="mx-auto mt-6 grid max-w-xl grid-cols-3 gap-3 text-center">
+        <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 gap-3 text-center">
           {[
             ["2026+", "EU mandates going live"],
             ["EN 16931", "the required standard"],
             ["0 files stored", "runs privately"],
           ].map(([big, small]) => (
-            <div
-              key={big}
-              className="rounded-xl border border-slate-200 bg-white/60 px-2 py-3 dark:border-slate-800 dark:bg-slate-900/50"
-            >
-              <dt className="text-sm font-semibold sm:text-base">{big}</dt>
-              <dd className="mt-0.5 text-[11px] leading-tight text-slate-500 dark:text-slate-400">
+            <div key={big} className="glass lift rounded-2xl px-2 py-4">
+              <dt className="brand-gradient-text text-base font-bold sm:text-lg">{big}</dt>
+              <dd className="mt-1 text-[11px] leading-tight text-slate-500 dark:text-slate-400">
                 {small}
               </dd>
             </div>
@@ -106,40 +109,51 @@ export default function Home() {
       </header>
 
       {/* Step indicator */}
-      <ol className="mb-8 flex items-center gap-2 text-xs font-medium text-slate-400">
-        {(["drop", "review", "done"] as Step[]).map((s, i) => (
-          <li key={s} className="flex items-center gap-2">
-            <span
-              className={`rounded-full px-2.5 py-1 ${
-                step === s ? "bg-indigo-600 text-white" : "bg-slate-200 dark:bg-slate-800"
-              }`}
-            >
-              {i + 1}. {s === "drop" ? "Upload" : s === "review" ? "Review" : "Done"}
-            </span>
-            {i < 2 && <span>→</span>}
-          </li>
-        ))}
+      <ol className="mb-8 flex items-center gap-2 text-xs font-semibold">
+        {(["drop", "review", "done"] as Step[]).map((s, i) => {
+          const idx = (["drop", "review", "done"] as Step[]).indexOf(step);
+          const active = step === s;
+          const past = i < idx;
+          return (
+            <li key={s} className="flex items-center gap-2">
+              <span
+                className={`rounded-full px-3 py-1.5 transition-all ${
+                  active
+                    ? "brand-btn text-white"
+                    : past
+                      ? "glass text-indigo-600 dark:text-indigo-300"
+                      : "glass text-slate-400"
+                }`}
+              >
+                {past ? "✓" : i + 1}. {s === "drop" ? "Upload" : s === "review" ? "Review" : "Done"}
+              </span>
+              {i < 2 && <span className="text-slate-300 dark:text-slate-600">→</span>}
+            </li>
+          );
+        })}
       </ol>
 
-      {step === "drop" && (
-        <DropZone busy={busy} error={error} onFile={uploadFile} onSample={loadSample} />
-      )}
+      <div key={step} className="flex w-full flex-col items-center animate-fade-up">
+        {step === "drop" && (
+          <DropZone busy={busy} error={error} onFile={uploadFile} onSample={loadSample} />
+        )}
 
-      {step === "review" && invoice && (
-        <ReviewForm
-          invoice={invoice}
-          issues={issues}
-          compliant={compliant}
-          onChange={setInvoice}
-          onRecalculate={() => setInvoice(recalculate(invoice))}
-          onContinue={() => setStep("done")}
-          onBack={restart}
-        />
-      )}
+        {step === "review" && invoice && (
+          <ReviewForm
+            invoice={invoice}
+            issues={issues}
+            compliant={compliant}
+            onChange={setInvoice}
+            onRecalculate={() => setInvoice(recalculate(invoice))}
+            onContinue={() => setStep("done")}
+            onBack={restart}
+          />
+        )}
 
-      {step === "done" && invoice && (
-        <DonePanel invoice={invoice} onBack={() => setStep("review")} onRestart={restart} />
-      )}
+        {step === "done" && invoice && (
+          <DonePanel invoice={invoice} onBack={() => setStep("review")} onRestart={restart} />
+        )}
+      </div>
 
       <footer className="mt-16 text-center text-xs text-slate-400">
         Your file never leaves the browser unencrypted and is never stored. Built for AI Build Day.

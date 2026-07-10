@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #f6f7fb;
   --foreground: #0f172a;
+
+  /* Brand accents */
+  --brand-1: #6366f1; /* indigo  */
+  --brand-2: #8b5cf6; /* violet  */
+  --brand-3: #d946ef; /* fuchsia */
+
+  /* Surfaces (glass) */
+  --card: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -12px rgba(79, 70, 229, 0.18);
 }
 
 @theme inline {
@@ -14,8 +24,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0b1120;
-    --foreground: #e2e8f0;
+    --background: #070b18;
+    --foreground: #e5e9f2;
+    --card: rgba(23, 30, 51, 0.78);
+    --card-border: rgba(148, 163, 184, 0.14);
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 40px -16px rgba(99, 102, 241, 0.35);
   }
 }
 
@@ -23,4 +36,137 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  position: relative;
+}
+
+/* Decorative background: aurora glow + faint grid, fixed behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 50% -8%, rgba(139, 92, 246, 0.18), transparent 70%),
+    radial-gradient(45% 40% at 85% 5%, rgba(217, 70, 239, 0.12), transparent 70%),
+    radial-gradient(40% 40% at 12% 8%, rgba(99, 102, 241, 0.14), transparent 70%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(99, 102, 241, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% -5%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 55% at 50% -5%, #000 30%, transparent 75%);
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background:
+      radial-gradient(60% 45% at 50% -8%, rgba(139, 92, 246, 0.28), transparent 70%),
+      radial-gradient(45% 40% at 85% 5%, rgba(217, 70, 239, 0.16), transparent 70%),
+      radial-gradient(40% 40% at 12% 8%, rgba(59, 130, 246, 0.18), transparent 70%);
+  }
+  body::after {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  }
+}
+
+/* ---------- Reusable design utilities ---------- */
+
+.brand-gradient-text {
+  background: linear-gradient(100deg, var(--brand-1), var(--brand-2) 45%, var(--brand-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.brand-btn {
+  background-image: linear-gradient(100deg, var(--brand-1), var(--brand-2) 55%, var(--brand-3));
+  box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.brand-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -8px rgba(124, 58, 237, 0.7);
+  filter: saturate(1.08);
+}
+.brand-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.brand-btn:disabled {
+  background-image: none;
+  background-color: rgb(203 213 225); /* slate-300 */
+  color: rgb(100 116 139); /* slate-500 */
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+@media (prefers-color-scheme: dark) {
+  .brand-btn:disabled {
+    background-color: rgb(51 65 85); /* slate-700 */
+    color: rgb(148 163 184); /* slate-400 */
+  }
+}
+
+.lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.lift:hover {
+  transform: translateY(-3px);
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float,
+  .brand-btn,
+  .lift {
+    animation: none;
+    transition: none;
+  }
 }

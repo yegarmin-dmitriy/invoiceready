@@ -96,7 +96,7 @@ export function ReviewForm({
   const party = (key: "seller" | "buyer", title: string) => {
     const p = invoice[key];
     return (
-      <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
+      <div className="glass rounded-2xl p-4">
         <h3 className="mb-3 text-sm font-semibold">{title}</h3>
         <div className="grid gap-3 sm:grid-cols-2">
           <Field label="Name" value={p.name} issue={byField.get(`${key}.name`)} onChange={(v) => patchParty(key, { name: v })} className="sm:col-span-2" />
@@ -114,10 +114,10 @@ export function ReviewForm({
     <div className="w-full max-w-3xl">
       {/* Status banner */}
       <div
-        className={`mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm ${
+        className={`mb-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm shadow-sm transition-colors ${
           compliant
-            ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300"
-            : "bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-200"
+            ? "border-emerald-300/60 bg-emerald-50/90 text-emerald-800 dark:border-emerald-800/50 dark:bg-emerald-950/40 dark:text-emerald-300"
+            : "border-amber-300/60 bg-amber-50/90 text-amber-800 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-200"
         }`}
       >
         <span className="font-medium">
@@ -134,7 +134,7 @@ export function ReviewForm({
       </div>
 
       {/* Header fields */}
-      <div className="mb-4 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-4 dark:border-slate-700 dark:bg-slate-900">
+      <div className="glass mb-4 grid gap-3 rounded-2xl p-4 sm:grid-cols-4">
         <Field label="Invoice #" value={invoice.invoiceNumber} issue={byField.get("invoiceNumber")} onChange={(v) => patch({ invoiceNumber: v })} />
         <Field label="Issue date" value={invoice.issueDate} issue={byField.get("issueDate")} onChange={(v) => patch({ issueDate: v })} />
         <Field label="Due date" value={invoice.dueDate} onChange={(v) => patch({ dueDate: v })} />
@@ -148,7 +148,7 @@ export function ReviewForm({
       </div>
 
       {/* Lines */}
-      <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900">
+      <div className="mb-4 glass rounded-2xl p-4">
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-sm font-semibold">Line items</h3>
           <button onClick={addLine} className="text-xs font-medium text-indigo-600 hover:underline dark:text-indigo-400">
@@ -177,7 +177,7 @@ export function ReviewForm({
       </div>
 
       {/* Totals */}
-      <div className="mb-6 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-3 dark:border-slate-700 dark:bg-slate-900">
+      <div className="glass mb-6 grid gap-3 rounded-2xl p-4 sm:grid-cols-3">
         <Field label="Net total" type="number" value={invoice.totals.net} issue={byField.get("totals.net")} onChange={(v) => patch({ totals: { ...invoice.totals, net: num(v) } })} />
         <Field label="VAT total" type="number" value={invoice.totals.vat} issue={byField.get("totals.vat")} onChange={(v) => patch({ totals: { ...invoice.totals, vat: num(v) } })} />
         <Field label="Grand total" type="number" value={invoice.totals.gross} issue={byField.get("totals.gross")} onChange={(v) => patch({ totals: { ...invoice.totals, gross: num(v) } })} />
@@ -190,7 +190,7 @@ export function ReviewForm({
         <button
           onClick={onContinue}
           disabled={!compliant}
-          className="rounded-full bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-700"
+          className="brand-btn rounded-full px-6 py-2.5 text-sm font-semibold text-white"
         >
           {compliant ? "Generate e-invoice →" : "Fix issues to continue"}
         </button>

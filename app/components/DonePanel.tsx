@@ -30,9 +30,11 @@ export function DonePanel({ invoice, onBack, onRestart }: Props) {
 
   return (
     <div className="w-full max-w-3xl">
-      <div className="mb-5 flex flex-col items-center gap-2 rounded-2xl bg-emerald-50 px-6 py-6 text-center dark:bg-emerald-950/40">
-        <div className="text-4xl">✅</div>
-        <h2 className="text-lg font-semibold text-emerald-800 dark:text-emerald-300">
+      <div className="mb-5 flex flex-col items-center gap-2 overflow-hidden rounded-3xl border border-emerald-300/50 bg-gradient-to-b from-emerald-50 to-emerald-100/40 px-6 py-8 text-center shadow-[0_20px_50px_-20px_rgba(16,185,129,0.45)] dark:border-emerald-800/50 dark:from-emerald-950/50 dark:to-emerald-900/20">
+        <div className="flex h-14 w-14 animate-float items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 text-3xl text-white shadow-lg shadow-emerald-500/30">
+          ✓
+        </div>
+        <h2 className="mt-1 text-xl font-bold text-emerald-800 dark:text-emerald-300">
           Compliant EU e-invoice ready
         </h2>
         <p className="text-sm text-emerald-700/80 dark:text-emerald-300/70">
@@ -40,7 +42,7 @@ export function DonePanel({ invoice, onBack, onRestart }: Props) {
         </p>
         <button
           onClick={download}
-          className="mt-2 rounded-full bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
+          className="mt-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:-translate-y-0.5 hover:shadow-emerald-500/40"
         >
           ↓ Download UBL XML
         </button>
@@ -49,20 +51,20 @@ export function DonePanel({ invoice, onBack, onRestart }: Props) {
       <div className="mb-3 flex gap-2">
         <button
           onClick={() => setTab("preview")}
-          className={`rounded-lg px-3 py-1.5 text-sm font-medium ${tab === "preview" ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900" : "text-slate-500"}`}
+          className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${tab === "preview" ? "brand-btn text-white" : "glass text-slate-500"}`}
         >
           Preview
         </button>
         <button
           onClick={() => setTab("xml")}
-          className={`rounded-lg px-3 py-1.5 text-sm font-medium ${tab === "xml" ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900" : "text-slate-500"}`}
+          className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${tab === "xml" ? "brand-btn text-white" : "glass text-slate-500"}`}
         >
           UBL XML
         </button>
       </div>
 
       {tab === "preview" ? (
-        <div className="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
+        <div className="glass rounded-2xl p-6">
           <div className="flex justify-between">
             <div>
               <div className="text-xs uppercase tracking-wide text-slate-400">Invoice</div>
