@@ -12,10 +12,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "InvoiceReady — EU e-invoice in 30 seconds";
+const description =
+  "Turn any invoice — even a photo — into a legally compliant EU e-invoice (EN 16931 / UBL 2.1) in 30 seconds.";
+
 export const metadata: Metadata = {
-  title: "InvoiceReady — EU e-invoice in 30 seconds",
-  description:
-    "Turn any invoice — even a photo — into a legally compliant EU e-invoice (EN 16931 / UBL 2.1) in 30 seconds.",
+  metadataBase: new URL("https://invoiceready-air-slate.vercel.app"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    siteName: "InvoiceReady",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
