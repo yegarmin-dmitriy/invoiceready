@@ -1,6 +1,6 @@
 # InvoiceReady
 
-**Turn any invoice, even a photo, into a legally compliant EU e-invoice in 30 seconds.**
+**Turn any invoice, even a photo, into a compliant EU e-invoice (EN 16931 / UBL 2.1 / Peppol) in 30 seconds.**
 
 Live demo: **https://invoiceready-air-slate.vercel.app**
 
@@ -10,7 +10,7 @@ Built for AI Build Day (24h hackathon). Category: Product.
 
 ## The problem
 
-EU e-invoicing mandates are arriving fast: Poland (KSeF), Belgium, France and more from 2026 onward. They require structured formats like **EN 16931 / UBL 2.1**, not PDFs or Word/Excel documents. Millions of SMBs without an ERP suddenly have invoices that are no longer legally valid, and no easy way to fix that.
+E-invoicing is becoming mandatory across the EU. Belgium requires structured **Peppol BIS 3.0** invoices for all B2B from January 2026, and Poland's KSeF and others are rolling out through 2026 and 2027. These mandates require structured formats built on **EN 16931**, not PDFs or Word/Excel documents. Businesses still invoicing in Word, Excel or PDF, and without an ERP, need a structured format and an easy way to produce it.
 
 InvoiceReady takes any invoice (a clean PDF, a scan, or a phone photo) and produces a structured, standards-compliant e-invoice, with plain-language validation so a non-accountant can understand and fix any issues.
 

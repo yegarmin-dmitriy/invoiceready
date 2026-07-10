@@ -85,17 +85,19 @@ export default function Home() {
           InvoiceReady
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg font-medium text-slate-700 sm:text-xl dark:text-slate-200">
-          Turn any invoice, even a photo, into a legally compliant EU e-invoice in 30 seconds.
+          Turn any invoice, even a photo, into a compliant EU e-invoice (EN 16931 / Peppol) in 30
+          seconds.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-          E-invoicing mandates are going live across the EU: Poland (KSeF), Belgium and France from
-          2026. They require structured formats, not PDFs. Millions of small businesses on Word and
-          Excel suddenly have invoices that no longer count. InvoiceReady fixes that in one step.
+          E-invoicing is becoming mandatory across the EU. Belgium requires structured Peppol invoices
+          for all B2B from January 2026, and Poland&apos;s KSeF and others are rolling out too. A PDF
+          or an Excel file no longer counts. InvoiceReady turns what you already have into a
+          Peppol-ready e-invoice, built on the EU EN 16931 standard.
         </p>
         <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 gap-3 text-center">
           {[
-            ["2026+", "EU mandates going live"],
-            ["EN 16931", "the required standard"],
+            ["Jan 2026", "Belgium B2B goes mandatory"],
+            ["Peppol BIS", "the format we generate"],
             ["0 files stored", "runs privately"],
           ].map(([big, small]) => (
             <div key={big} className="glass lift rounded-2xl px-2 py-4">
