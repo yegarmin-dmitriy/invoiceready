@@ -35,14 +35,14 @@ function baseInvoice(): Invoice {
 
 const rules = (issues: ReturnType<typeof validateInvoice>) => issues.map((i) => i.rule);
 
-describe("validateInvoice — happy path", () => {
+describe("validateInvoice: happy path", () => {
   test("a compliant invoice produces no errors", () => {
     const issues = validateInvoice(baseInvoice());
     expect(issues.filter((i) => i.severity === "error")).toEqual([]);
   });
 });
 
-describe("validateInvoice — required fields", () => {
+describe("validateInvoice: required fields", () => {
   test("flags a missing invoice number (BR-02)", () => {
     const inv = { ...baseInvoice(), invoiceNumber: "" };
     const issues = validateInvoice(inv);
@@ -76,7 +76,7 @@ describe("validateInvoice — required fields", () => {
   });
 });
 
-describe("validateInvoice — arithmetic", () => {
+describe("validateInvoice: arithmetic", () => {
   test("flags a line whose total is not quantity × unit price", () => {
     const inv = baseInvoice();
     inv.lines[0].lineTotal = 2000; // should be 2400
@@ -111,7 +111,7 @@ describe("validateInvoice — arithmetic", () => {
   });
 });
 
-describe("validateInvoice — VAT id format", () => {
+describe("validateInvoice: VAT id format", () => {
   test("warns on a malformed VAT identifier", () => {
     const inv = baseInvoice();
     inv.seller.vatId = "1234"; // no country prefix

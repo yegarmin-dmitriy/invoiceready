@@ -33,7 +33,7 @@ function baseInvoice(overrides: Partial<Invoice> = {}): Invoice {
   });
 }
 
-describe("toUBL — document header", () => {
+describe("toUBL: document header", () => {
   const xml = toUBL(baseInvoice());
 
   test("emits an XML declaration and UBL Invoice root with namespaces", () => {
@@ -58,7 +58,7 @@ describe("toUBL — document header", () => {
   });
 });
 
-describe("toUBL — parties", () => {
+describe("toUBL: parties", () => {
   const xml = toUBL(baseInvoice());
 
   test("includes supplier legal name and VAT company id", () => {
@@ -72,7 +72,7 @@ describe("toUBL — parties", () => {
   });
 });
 
-describe("toUBL — lines and monetary totals", () => {
+describe("toUBL: lines and monetary totals", () => {
   const xml = toUBL(baseInvoice());
 
   test("emits one InvoiceLine per line item with 2-decimal amounts", () => {
@@ -92,7 +92,7 @@ describe("toUBL — lines and monetary totals", () => {
   });
 });
 
-describe("toUBL — tax breakdown", () => {
+describe("toUBL: tax breakdown", () => {
   test("groups a single VAT rate into one TaxSubtotal", () => {
     const xml = toUBL(baseInvoice());
     expect((xml.match(/<cac:TaxSubtotal>/g) || []).length).toBe(1);
@@ -125,7 +125,7 @@ describe("toUBL — tax breakdown", () => {
   });
 });
 
-describe("toUBL — escaping", () => {
+describe("toUBL: escaping", () => {
   test("escapes XML special characters in text values", () => {
     const inv = baseInvoice();
     inv.seller.name = "Tom & Jerry <Design> Co.";

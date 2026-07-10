@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "InvoiceReady — turn any invoice into a legally compliant EU e-invoice";
+export const alt = "InvoiceReady: turn any invoice into a legally compliant EU e-invoice";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -50,13 +50,13 @@ export default function OpengraphImage() {
           InvoiceReady
         </div>
         <div style={{ display: "flex", marginTop: 20, fontSize: 44, fontWeight: 600, color: "#f1f5f9" }}>
-          Turn any invoice — even a photo — into a
+          Turn any invoice, even a photo, into a
         </div>
         <div style={{ display: "flex", fontSize: 44, fontWeight: 600, color: "#f1f5f9" }}>
           legally compliant EU e-invoice in 30 seconds.
         </div>
         <div style={{ display: "flex", marginTop: 40, fontSize: 28, color: "#94a3b8" }}>
-          E-invoicing mandates are arriving across the EU — Poland, Belgium, France 2026+
+          E-invoicing mandates are arriving across the EU: Poland, Belgium, France 2026+
         </div>
       </div>
     ),

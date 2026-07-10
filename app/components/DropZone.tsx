@@ -70,7 +70,7 @@ export function DropZone({ busy, error, onFile, onSample }: Props) {
           {busy ? "Reading your invoice…" : "Drop an invoice here"}
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          PDF, scan, or a phone photo — we never store your file.
+          PDF, scan, or a phone photo. We never store your file.
         </p>
       </div>
 

@@ -6,7 +6,7 @@ import { extractInvoiceFromFile } from "@/lib/extract";
  * POST /api/extract
  *
  * Accepts a multipart form with an invoice `file` (PDF or image) and returns
- * `{ invoice }` — structured JSON per the invoice schema. Compliance is decided
+ * `{ invoice }`, structured JSON per the invoice schema. Compliance is decided
  * client-side by the deterministic validator, not here.
  *
  * Mock mode (`EXTRACT_MOCK=1`) skips the AI call and returns a built-in sample,

@@ -6,7 +6,7 @@ import { z } from "zod";
  * This mirrors the subset of EN 16931 semantic fields we need to produce a
  * valid UBL 2.1 invoice. It is intentionally flat and forgiving on input
  * (numeric strings are coerced) because it is also the shape the AI extraction
- * step returns — the deterministic validator in `lib/validate.ts` is what
+ * step returns, the deterministic validator in `lib/validate.ts` is what
  * decides compliance, not this schema.
  */
 

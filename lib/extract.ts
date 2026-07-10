@@ -3,7 +3,7 @@
  *
  * This is the only place that talks to the model. It sends the uploaded invoice
  * (image or PDF) to Claude vision and asks for structured JSON matching our
- * invoice schema. It does NOT decide compliance — the deterministic validator
+ * invoice schema. It does NOT decide compliance, the deterministic validator
  * does. Credentials come from env vars only; nothing is logged or stored.
  */
 

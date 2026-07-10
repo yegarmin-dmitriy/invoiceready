@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "InvoiceReady — EU e-invoice in 30 seconds";
+const title = "InvoiceReady: EU e-invoice in 30 seconds";
 const description =
-  "Turn any invoice — even a photo — into a legally compliant EU e-invoice (EN 16931 / UBL 2.1) in 30 seconds.";
+  "Turn any invoice, even a photo, into a legally compliant EU e-invoice (EN 16931 / UBL 2.1) in 30 seconds.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://invoiceready-air-slate.vercel.app"),

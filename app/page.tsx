@@ -85,10 +85,10 @@ export default function Home() {
           InvoiceReady
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg font-medium text-slate-700 sm:text-xl dark:text-slate-200">
-          Turn any invoice — even a photo — into a legally compliant EU e-invoice in 30 seconds.
+          Turn any invoice, even a photo, into a legally compliant EU e-invoice in 30 seconds.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-          E-invoicing mandates are going live across the EU — Poland (KSeF), Belgium and France from
+          E-invoicing mandates are going live across the EU: Poland (KSeF), Belgium and France from
           2026. They require structured formats, not PDFs. Millions of small businesses on Word and
           Excel suddenly have invoices that no longer count. InvoiceReady fixes that in one step.
         </p>

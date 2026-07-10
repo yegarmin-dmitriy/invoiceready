@@ -1,6 +1,6 @@
 # InvoiceReady
 
-**Turn any invoice — even a photo — into a legally compliant EU e-invoice in 30 seconds.**
+**Turn any invoice, even a photo, into a legally compliant EU e-invoice in 30 seconds.**
 
 Live demo: **https://invoiceready-air-slate.vercel.app**
 
@@ -10,25 +10,25 @@ Built for AI Build Day (24h hackathon). Category: Product.
 
 ## The problem
 
-EU e-invoicing mandates are arriving fast — Poland (KSeF), Belgium, France and more from 2026 onward. They require structured formats like **EN 16931 / UBL 2.1**, not PDFs or Word/Excel documents. Millions of SMBs without an ERP suddenly have invoices that are no longer legally valid, and no easy way to fix that.
+EU e-invoicing mandates are arriving fast: Poland (KSeF), Belgium, France and more from 2026 onward. They require structured formats like **EN 16931 / UBL 2.1**, not PDFs or Word/Excel documents. Millions of SMBs without an ERP suddenly have invoices that are no longer legally valid, and no easy way to fix that.
 
-InvoiceReady takes any invoice — a clean PDF, a scan, or a phone photo — and produces a structured, standards-compliant e-invoice, with plain-language validation so a non-accountant can understand and fix any issues.
+InvoiceReady takes any invoice (a clean PDF, a scan, or a phone photo) and produces a structured, standards-compliant e-invoice, with plain-language validation so a non-accountant can understand and fix any issues.
 
 ## How it works
 
 1. **Drop** an invoice (PDF / image) or pick a built-in sample.
 2. **Review** the extracted data in an editable form. Deterministic EN 16931 checks flag problems inline (🔴 errors / 🟡 warnings) in human language.
-3. **Done** — download a valid UBL 2.1 XML and see a human-readable preview.
+3. **Done**: download a valid UBL 2.1 XML and see a human-readable preview.
 
-The AI only *extracts* data. Whether the invoice is compliant is decided by a **deterministic rule engine**, never by the model — so results are predictable and auditable.
+The AI only *extracts* data. Whether the invoice is compliant is decided by a **deterministic rule engine**, never by the model, so results are predictable and auditable.
 
 ## Architecture
 
-Stateless Next.js (App Router, TypeScript, Tailwind) on Vercel. No database, no auth, and **uploaded files are never stored** — privacy is a feature.
+Stateless Next.js (App Router, TypeScript, Tailwind) on Vercel. No database, no auth, and **uploaded files are never stored**. Privacy is a feature.
 
 | Module | Responsibility |
 | --- | --- |
-| [`lib/types.ts`](lib/types.ts) | Zod invoice model (parties, lines, totals) — the EN 16931 field subset |
+| [`lib/types.ts`](lib/types.ts) | Zod invoice model (parties, lines, totals), the EN 16931 field subset |
 | [`lib/validate.ts`](lib/validate.ts) | Deterministic EN 16931 rules: required fields, line & document arithmetic, VAT id format. Returns `{severity, field, rule, message}` |
 | [`lib/ubl.ts`](lib/ubl.ts) | UBL 2.1 Invoice XML generator (Peppol BIS Billing 3.0) |
 | [`lib/extract.ts`](lib/extract.ts) | Claude vision extraction via the LiteLLM OpenAI-compatible endpoint |
@@ -40,7 +40,7 @@ Stateless Next.js (App Router, TypeScript, Tailwind) on Vercel. No database, no 
 
 ```bash
 npm install
-npm run dev:mock   # runs with EXTRACT_MOCK=1 — no AI key needed, uses samples
+npm run dev:mock   # runs with EXTRACT_MOCK=1, no AI key needed, uses samples
 ```
 
 Open http://localhost:3000. Use **Try a sample** or drop a file (in mock mode any dropped file returns the clean sample).
@@ -55,7 +55,7 @@ npm test
 
 ## Configuration
 
-Extraction talks to an OpenAI-compatible LiteLLM endpoint. Credentials live in environment variables only — never in code.
+Extraction talks to an OpenAI-compatible LiteLLM endpoint. Credentials live in environment variables only, never in code.
 
 | Variable | Purpose |
 | --- | --- |
@@ -70,5 +70,5 @@ MVP targets the pan-European **EN 16931** semantic model serialised as **UBL 2.1
 
 ## Notes
 
-- All sample and fixture data is **synthetic** — no real company or customer data.
+- All sample and fixture data is **synthetic**, no real company or customer data.
 - User-facing text and commits are in English.

@@ -4,7 +4,7 @@ import type { Invoice, Line } from "./types";
  * Deterministic UBL 2.1 Invoice generator (EN 16931, Peppol BIS Billing 3.0).
  *
  * Input is assumed already validated by `lib/validate.ts`. This module only
- * serialises — it does not decide compliance. Amounts are emitted with two
+ * serialises, it does not decide compliance. Amounts are emitted with two
  * decimals and the document currency, as required by the standard.
  */
 

@@ -2,7 +2,7 @@ import { InvoiceSchema, type Invoice } from "./types";
 
 /**
  * Three synthetic sample invoices used both by the "Try a sample" buttons and
- * by the mock extractor. All data is fictional — no real company or customer.
+ * by the mock extractor. All data is fictional, no real company or customer.
  *
  * - clean:  a well-formed, fully compliant invoice
  * - broken: missing seller VAT id and inconsistent totals (demo for issues)
@@ -107,7 +107,7 @@ const photo: Invoice = InvoiceSchema.parse({
 });
 
 export const SAMPLES: Sample[] = [
-  { id: "clean", label: "Clean PDF invoice", hint: "A tidy studio invoice — already compliant.", invoice: clean },
+  { id: "clean", label: "Clean PDF invoice", hint: "A tidy studio invoice, already compliant.", invoice: clean },
   {
     id: "broken",
     label: "Invoice with problems",

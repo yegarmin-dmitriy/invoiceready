@@ -7,7 +7,7 @@ function formRequest(fields: Record<string, string>): Request {
   return new Request("http://localhost/api/extract", { method: "POST", body: fd });
 }
 
-describe("POST /api/extract — mock mode", () => {
+describe("POST /api/extract: mock mode", () => {
   const prev = process.env.EXTRACT_MOCK;
   beforeEach(() => {
     process.env.EXTRACT_MOCK = "1";
@@ -30,7 +30,7 @@ describe("POST /api/extract — mock mode", () => {
   });
 });
 
-describe("POST /api/extract — misconfiguration", () => {
+describe("POST /api/extract: misconfiguration", () => {
   const prevMock = process.env.EXTRACT_MOCK;
   const prevKey = process.env.LITELLM_API_KEY;
   beforeEach(() => {

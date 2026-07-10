@@ -31,8 +31,8 @@ function moneyEquals(a: number, b: number): boolean {
 }
 
 /**
- * VAT identifier: ISO country prefix followed by 2–13 alphanumeric characters.
- * A light structural check — not a VIES lookup.
+ * VAT identifier: ISO country prefix followed by 2-13 alphanumeric characters.
+ * A light structural check, not a VIES lookup.
  */
 const VAT_ID_PATTERN = /^[A-Z]{2}[0-9A-Z]{2,13}$/;
 
