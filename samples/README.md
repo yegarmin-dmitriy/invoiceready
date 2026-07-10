@@ -44,6 +44,26 @@ Quality variants (clean / scan / photo) exercise the vision step; the ground
 truth lets us score extraction accuracy field by field once the LiteLLM key is
 wired in.
 
+## Scoring extraction accuracy
+
+[`score.mts`](score.mts) runs every synthetic image and PDF through the
+extractor and compares the result to ground truth, field by field, using the
+pure comparison in [`compare.ts`](compare.ts) (text is matched leniently, money
+within half a cent, and compliance-critical fields are tracked separately).
+
+```bash
+# real run (needs the model)
+LITELLM_API_KEY=... LITELLM_BASE_URL=... npx tsx samples/score.mts
+
+# wiring self-test, no key needed (uses ground truth as the "extraction")
+SCORE_SELFTEST=1 npx tsx samples/score.mts
+```
+
+It prints a per-file table, averages by quality variant (clean / scan / photo /
+pdf), an overall and critical-field score, and the most-missed fields, so we can
+see exactly where extraction struggles. The comparison logic is unit-tested
+(`compare.test.ts`).
+
 ## `official/` (downloaded references)
 
 Real EU e-invoice references, used to sanity-check our UBL output format and to
