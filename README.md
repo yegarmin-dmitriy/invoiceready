@@ -2,7 +2,7 @@
 
 **Turn any invoice — even a photo — into a legally compliant EU e-invoice in 30 seconds.**
 
-Live demo: **https://invoiceready-hwz8p2ftq-air-slate.vercel.app**
+Live demo: **https://invoiceready-air-slate.vercel.app**
 
 Built for AI Build Day (24h hackathon). Category: Product.
 
