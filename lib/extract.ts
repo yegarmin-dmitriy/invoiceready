@@ -37,6 +37,18 @@ async function toDataUrl(file: File): Promise<string> {
   return `data:${mime};base64,${b64}`;
 }
 
+/**
+ * Build the model content part for an uploaded file. PDFs go as an OpenAI
+ * "file" part (LiteLLM maps it to Anthropic's document API); everything else is
+ * treated as an image. Sending a PDF as an image_url fails with a 400.
+ */
+export function mediaPart(mime: string, dataUrl: string): object {
+  if (mime === "application/pdf") {
+    return { type: "file", file: { filename: "invoice.pdf", file_data: dataUrl } };
+  }
+  return { type: "image_url", image_url: { url: dataUrl } };
+}
+
 /** Strip accidental ```json fences and parse. */
 function parseModelJson(content: string): unknown {
   const cleaned = content
@@ -50,6 +62,7 @@ function parseModelJson(content: string): unknown {
 export async function extractInvoiceFromFile(file: File): Promise<unknown> {
   const model = process.env.LITELLM_MODEL ?? "anthropic/claude-sonnet-4-5";
   const dataUrl = await toDataUrl(file);
+  const media = mediaPart(file.type || "application/octet-stream", dataUrl);
 
   const res = await fetch(`${baseUrl()}/chat/completions`, {
     method: "POST",
@@ -64,10 +77,7 @@ export async function extractInvoiceFromFile(file: File): Promise<unknown> {
       messages: [
         {
           role: "user",
-          content: [
-            { type: "text", text: EXTRACTION_PROMPT },
-            { type: "image_url", image_url: { url: dataUrl } },
-          ],
+          content: [{ type: "text", text: EXTRACTION_PROMPT }, media],
         },
       ],
     }),
