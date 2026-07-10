@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InvoiceReady demo teleprompter</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --fg: #f4f6fb;
+        --muted: #9aa6bd;
+        --accent: #a78bfa;
+        --line: rgba(148, 163, 184, 0.18);
+        --say-size: 30px;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        line-height: 1.5;
+        padding: 3rem 1.2rem 6rem;
+      }
+      .wrap { max-width: 900px; margin: 0 auto; }
+      header { text-align: center; margin-bottom: 2.5rem; }
+      header h1 { font-size: 1.8rem; letter-spacing: -0.02em; }
+      header .sub { color: var(--muted); margin-top: 0.4rem; font-size: 0.95rem; }
+      .links { color: var(--muted); font-size: 0.85rem; margin-top: 0.6rem; }
+      .links a { color: var(--accent); }
+
+      .controls {
+        position: sticky; top: 0; z-index: 5; display: flex; gap: 0.6rem; justify-content: center;
+        padding: 0.7rem; margin: -0.7rem -1.2rem 2rem; background: rgba(11, 16, 32, 0.9);
+        backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+      }
+      .controls button {
+        background: rgba(139, 92, 246, 0.15); color: var(--fg); border: 1px solid var(--line);
+        border-radius: 999px; padding: 0.4rem 0.9rem; font-size: 0.85rem; cursor: pointer;
+      }
+      .controls button:hover { background: rgba(139, 92, 246, 0.3); }
+
+      .scene { padding: 1.6rem 0; border-top: 1px solid var(--line); }
+      .scene .tag {
+        display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+        color: var(--accent); text-transform: uppercase;
+      }
+      .scene h2 { font-size: 1.15rem; margin: 0.3rem 0 0.9rem; font-weight: 700; }
+      .do {
+        color: var(--muted); font-size: 0.98rem; margin: 0.5rem 0 1rem; padding-left: 0.9rem;
+        border-left: 2px solid var(--line);
+      }
+      .do b { color: #cbd5e1; font-weight: 600; }
+      .say {
+        font-size: var(--say-size); font-weight: 600; letter-spacing: -0.01em; line-height: 1.45;
+        color: #ffffff; background: rgba(139, 92, 246, 0.08); border: 1px solid var(--line);
+        border-radius: 14px; padding: 1.1rem 1.3rem; margin-top: 0.5rem;
+      }
+      .say .label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+      .note { color: var(--muted); font-size: 0.9rem; margin-top: 1rem; font-style: italic; }
+      .backup { opacity: 0.62; }
+      .backup .say { background: rgba(148, 163, 184, 0.06); }
+
+      .check { margin-top: 1rem; }
+      .check li { color: var(--muted); font-size: 0.95rem; margin: 0.35rem 0; list-style: none; padding-left: 1.4rem; position: relative; }
+      .check li::before { content: "☐"; position: absolute; left: 0; color: var(--accent); }
+      code { background: rgba(148,163,184,0.14); padding: 0.1em 0.4em; border-radius: 5px; font-size: 0.9em; }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button onclick="bump(4)">A+ текст</button>
+      <button onclick="bump(-4)">A- текст</button>
+      <button onclick="toggleDo()">Скрыть/показать указания</button>
+    </div>
+
+    <div class="wrap">
+      <header>
+        <h1>InvoiceReady — телесуфлёр для записи</h1>
+        <div class="sub">Мелкий серый текст — что делаешь на экране. Крупные фиолетовые блоки — что говоришь вслух (EN).</div>
+        <div class="links">
+          Приложение: <a href="https://invoiceready-air-slate.vercel.app">invoiceready-air-slate.vercel.app</a>
+          &nbsp;·&nbsp; Презентация: <a href="https://invoiceready-air-slate.vercel.app/deck.html">/deck.html</a>
+        </div>
+        <div class="links">Цель: около 3:00, потолок 5:00.</div>
+      </header>
+
+      <section class="scene">
+        <span class="tag">Сцена 1 · 0:00 to 0:20</span>
+        <h2>Крючок</h2>
+        <p class="do"><b>На экране:</b> медленно показываешь лендинг. Дай прочитать заголовок и три карточки.</p>
+        <div class="say"><span class="label">Говоришь</span>In 2026, e-invoicing becomes mandatory across the European Union. Poland, Belgium, France and more. And they will not accept a PDF or an Excel file. Millions of small businesses are about to find out their invoices no longer count. InvoiceReady fixes that in about thirty seconds.</div>
+      </section>
+
+      <section class="scene">
+        <span class="tag">Сцена 2 · 0:20 to 1:05</span>
+        <h2>Даже фото, и это настоящий AI</h2>
+        <p class="do"><b>На экране:</b> перетаскиваешь заранее подготовленный файл-фото на зону загрузки. Показываешь короткое «Reading your invoice», затем заполненную форму Review. Медленно скроллишь поля: продавец, покупатель, VAT, строки, итоги.</p>
+        <div class="say"><span class="label">Говоришь</span>So I take a photo of a paper invoice and drop it in. The AI reads it straight from the image. Seller, buyer, VAT numbers, line items, totals. But here is the key idea: the AI only reads. It never decides whether the invoice is legal.</div>
+        <p class="note">Если распознавание задержалось — не жди, вырежешь паузу в монтаже. Если нет сети — используй резерв ниже.</p>
+      </section>
+
+      <section class="scene backup">
+        <span class="tag">Сцена 2-бис · резерв</span>
+        <h2>Если нет сети (не записывай, если Сцена 2 прошла)</h2>
+        <p class="do"><b>На экране:</b> вместо перетаскивания нажимаешь карточку «Photo of a paper invoice». Форма открывается мгновенно.</p>
+        <div class="say"><span class="label">Говоришь (убери «straight from the image»)</span>So I take a photo of a paper invoice and drop it in. The AI reads it. Seller, buyer, VAT numbers, line items, totals. But here is the key idea: the AI only reads. It never decides whether the invoice is legal.</div>
+      </section>
+
+      <section class="scene">
+        <span class="tag">Сцена 3 · 1:05 to 1:55</span>
+        <h2>Решают правила, а не AI</h2>
+        <p class="do"><b>На экране:</b> «Convert another» → карточка «Invoice with problems». Дай отрисоваться красным и жёлтым подсказкам. Наведи курсор на поле VAT продавца, затем на итоги.</p>
+        <div class="say"><span class="label">Говоришь</span>Whether it is legal is decided by deterministic rules. Here is an invoice with problems. InvoiceReady checked it against the European standard, EN 16931, and it says, in plain language, what is wrong. A missing VAT number. Totals that do not add up.</div>
+        <p class="do"><b>На экране:</b> жмёшь «Recalculate totals» (арифметика чинится), затем впечатываешь VAT в поле продавца, например <code>PL1234567890</code>. Баннер зеленеет.</p>
+        <div class="say"><span class="label">Говоришь</span>One click recalculates the numbers, I add the missing VAT number, and it turns green. Now it is compliant.</div>
+      </section>
+
+      <section class="scene">
+        <span class="tag">Сцена 4 · 1:55 to 2:35</span>
+        <h2>Результат и стандарты</h2>
+        <p class="do"><b>На экране:</b> «Generate e-invoice» → экран Done с зелёным бейджем. Жмёшь «Download UBL XML» (покажи, что файл скачался). Переключаешься на вкладку «UBL XML», чуть скроллишь XML.</p>
+        <div class="say"><span class="label">Говоришь</span>Now I download a real e-invoice. UBL, the Peppol standard. Every invoice we generate passes the official EN 16931 and Peppol validators with zero errors. No ERP, no setup, and the file never leaves the browser. Privacy is built in.</div>
+      </section>
+
+      <section class="scene">
+        <span class="tag">Сцена 5 · 2:35 to 3:00</span>
+        <h2>Финал</h2>
+        <p class="do"><b>На экране:</b> возвращаешься на лендинг или показываешь последний слайд презентации (<code>/deck.html</code>, стрелками до конца). Покажи адрес на экране.</p>
+        <div class="say"><span class="label">Говоришь</span>Any invoice in. A compliant European e-invoice out. In thirty seconds. InvoiceReady.</div>
+      </section>
+
+      <section class="scene">
+        <span class="tag">Перед записью</span>
+        <h2>Быстрый чек-лист</h2>
+        <ul class="check">
+          <li>Браузер в тёмной теме, 1080p, чистое окно, уведомления выключены.</li>
+          <li>Файл-фото на рабочем столе (например <code>*.photo.jpg</code> из <code>samples/synthetic</code>).</li>
+          <li>Прогнал весь путь один раз вживую: фото → форма → broken → зелёный → скачивание.</li>
+          <li>Звук микрофона включён в записи экрана.</li>
+        </ul>
+      </section>
+    </div>
+
+    <script>
+      function bump(d) {
+        const r = document.documentElement;
+        const cur = parseInt(getComputedStyle(r).getPropertyValue("--say-size")) || 30;
+        r.style.setProperty("--say-size", Math.max(18, Math.min(60, cur + d)) + "px");
+      }
+      let doHidden = false;
+      function toggleDo() {
+        doHidden = !doHidden;
+        document.querySelectorAll(".do, .note").forEach((e) => (e.style.display = doHidden ? "none" : ""));
+      }
+    </script>
+  </body>
+</html>
