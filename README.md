@@ -62,7 +62,7 @@ Extraction talks to an OpenAI-compatible LiteLLM endpoint. Credentials live in e
 | `EXTRACT_MOCK` | Set to `1` to skip the AI call and return built-in samples |
 | `LITELLM_API_KEY` | LiteLLM API key |
 | `LITELLM_BASE_URL` | LiteLLM base URL (OpenAI-compatible) |
-| `LITELLM_MODEL` | Optional model override (default `claude-sonnet-5`) |
+| `LITELLM_MODEL` | Optional model override (default `anthropic/claude-sonnet-4-5`) |
 
 ## Compliance scope
 

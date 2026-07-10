@@ -48,7 +48,7 @@ function parseModelJson(content: string): unknown {
 }
 
 export async function extractInvoiceFromFile(file: File): Promise<unknown> {
-  const model = process.env.LITELLM_MODEL ?? "claude-sonnet-5";
+  const model = process.env.LITELLM_MODEL ?? "anthropic/claude-sonnet-4-5";
   const dataUrl = await toDataUrl(file);
 
   const res = await fetch(`${baseUrl()}/chat/completions`, {
