@@ -46,6 +46,9 @@ export const InvoiceSchema = z.object({
   invoiceNumber: z.string().default(""),
   /** Buyer reference / purchase order (BT-10). Peppol requires one of these. */
   buyerReference: z.string().default(""),
+  /** Seller payment IBAN (BT-84). Emitted as PaymentMeans; required by some
+   *  national Peppol rules (e.g. NL-R-007). */
+  paymentIban: z.string().default(""),
   /** Issue date, ISO "YYYY-MM-DD". */
   issueDate: z.string().default(""),
   /** Payment due date, ISO "YYYY-MM-DD". */

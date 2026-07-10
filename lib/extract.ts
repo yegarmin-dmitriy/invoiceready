@@ -11,6 +11,7 @@ const EXTRACTION_PROMPT = `You are an invoice data extractor. Read the attached 
 
 {
   "invoiceNumber": string,
+  "paymentIban": "seller IBAN if shown, else \"\"",
   "issueDate": "YYYY-MM-DD",
   "dueDate": "YYYY-MM-DD",
   "currency": "ISO 4217 code, e.g. EUR",

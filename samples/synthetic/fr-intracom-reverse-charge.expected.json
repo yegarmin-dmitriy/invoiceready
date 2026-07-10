@@ -1,5 +1,7 @@
 {
   "invoiceNumber": "AL-2026-0091",
+  "buyerReference": "",
+  "paymentIban": "FR76 3000 6000 0112 3456 7890 189",
   "issueDate": "2026-06-30",
   "dueDate": "2026-07-30",
   "currency": "EUR",

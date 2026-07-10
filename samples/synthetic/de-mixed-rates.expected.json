@@ -1,5 +1,7 @@
 {
   "invoiceNumber": "BK-2026-1187",
+  "buyerReference": "",
+  "paymentIban": "DE89 3704 0044 0532 0130 00",
   "issueDate": "2026-06-21",
   "dueDate": "2026-07-21",
   "currency": "EUR",

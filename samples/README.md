@@ -93,8 +93,6 @@ the official XSLT via Saxon-JS.
 npx tsx samples/validate.mts
 ```
 
-Current result: all five invoices pass **CEN EN 16931** with zero errors and
-zero warnings. Four of five also pass the stricter **Peppol BIS 3.0**; the
-Netherlands sample trips `NL-R-007` (a Dutch national rule that requires
-`cac:PaymentMeans`), which is the known IBAN/payment-means gap in `lib/ubl.ts`.
-The rule files are cached under `samples/.validator` (git-ignored).
+Current result: all five invoices pass both **CEN EN 16931** and the stricter
+**Peppol BIS 3.0** with zero errors and zero warnings. The rule files are cached
+under `samples/.validator` (git-ignored).

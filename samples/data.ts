@@ -66,6 +66,7 @@ function truthFrom(
   const vat = round(lines.reduce((s, l) => s + l.lineTotal * (l.vatRate / 100), 0));
   return InvoiceSchema.parse({
     invoiceNumber: d.invoiceNumber,
+    paymentIban: d.seller.iban,
     issueDate: d.issueDate,
     dueDate: d.dueDate,
     currency: d.currency,

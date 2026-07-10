@@ -1,5 +1,7 @@
 {
   "invoiceNumber": "VDB-2026-3310",
+  "buyerReference": "",
+  "paymentIban": "NL91 ABNA 0417 1643 00",
   "issueDate": "2026-05-18",
   "dueDate": "2026-06-17",
   "currency": "USD",

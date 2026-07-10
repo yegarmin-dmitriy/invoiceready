@@ -1,5 +1,7 @@
 {
   "invoiceNumber": "CN-2026-0006",
+  "buyerReference": "",
+  "paymentIban": "BE68 5390 0754 7034",
   "issueDate": "2026-07-08",
   "dueDate": "2026-07-08",
   "currency": "EUR",

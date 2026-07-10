@@ -21,6 +21,7 @@ export interface Sample {
 
 const clean: Invoice = InvoiceSchema.parse({
   invoiceNumber: "NW-2026-0042",
+  paymentIban: "PL61 1090 1014 0000 0712 1981 2874",
   issueDate: "2026-07-03",
   dueDate: "2026-08-02",
   currency: "EUR",
@@ -80,6 +81,7 @@ const broken: Invoice = InvoiceSchema.parse({
 
 const photo: Invoice = InvoiceSchema.parse({
   invoiceNumber: "INV-000318",
+  paymentIban: "NL91 ABNA 0417 1643 00",
   issueDate: "2026-06-28",
   dueDate: "2026-07-12",
   currency: "EUR",

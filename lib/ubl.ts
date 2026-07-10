@@ -99,6 +99,21 @@ function taxSubtotals(lines: Line[], currency: string): string {
     .join("\n");
 }
 
+/**
+ * Payment means (BG-16). Emitted only when an IBAN is known. Uses code 30
+ * (credit transfer). Some national Peppol rules (e.g. NL-R-007) require this.
+ */
+function paymentMeans(iban: string): string {
+  if (!iban.trim()) return "";
+  return `  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>${esc(iban.trim())}</cbc:ID>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+`;
+}
+
 function lineBlock(line: Line, index: number, currency: string): string {
   return `  <cac:InvoiceLine>
     <cbc:ID>${index + 1}</cbc:ID>
@@ -142,7 +157,7 @@ ${partyBlock(invoice.seller, c)}
   <cac:AccountingCustomerParty>
 ${partyBlock(invoice.buyer, c)}
   </cac:AccountingCustomerParty>
-  <cac:TaxTotal>
+${paymentMeans(invoice.paymentIban)}  <cac:TaxTotal>
     <cbc:TaxAmount currencyID="${c}">${money(invoice.totals.vat)}</cbc:TaxAmount>
 ${taxSubtotals(invoice.lines, c)}
   </cac:TaxTotal>

@@ -143,6 +143,26 @@ describe("toUBL: Peppol-required identifiers", () => {
     expect(xml).toContain('<cbc:EndpointID schemeID="9930">DE811569869</cbc:EndpointID>');
   });
 
+  test("emits PaymentMeans with an IBAN when paymentIban is set", () => {
+    const xml = toUBL(baseInvoice({ paymentIban: "PL61 1090 1014 0000 0712 1981 2874" }));
+    expect(xml).toContain("<cac:PaymentMeans>");
+    expect(xml).toContain("<cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>");
+    expect(xml).toContain("<cbc:ID>PL61 1090 1014 0000 0712 1981 2874</cbc:ID>");
+  });
+
+  test("omits PaymentMeans when no IBAN is present", () => {
+    expect(toUBL(baseInvoice())).not.toContain("<cac:PaymentMeans>");
+  });
+
+  test("places PaymentMeans after the customer party and before TaxTotal", () => {
+    const xml = toUBL(baseInvoice({ paymentIban: "PL61109010140000071219812874" }));
+    const cust = xml.indexOf("</cac:AccountingCustomerParty>");
+    const pm = xml.indexOf("<cac:PaymentMeans>");
+    const tax = xml.indexOf("<cac:TaxTotal>");
+    expect(cust).toBeLessThan(pm);
+    expect(pm).toBeLessThan(tax);
+  });
+
   test("places BuyerReference after DocumentCurrencyCode and before the supplier party", () => {
     const xml = toUBL(baseInvoice());
     const cur = xml.indexOf("<cbc:DocumentCurrencyCode>");
