@@ -57,8 +57,6 @@
       }
       .say .label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
       .note { color: var(--muted); font-size: 0.9rem; margin-top: 1rem; font-style: italic; }
-      .backup { opacity: 0.62; }
-      .backup .say { background: rgba(148, 163, 184, 0.06); }
 
       .check { margin-top: 1rem; }
       .check li { color: var(--muted); font-size: 0.95rem; margin: 0.35rem 0; list-style: none; padding-left: 1.4rem; position: relative; }
@@ -81,7 +79,7 @@
           Приложение: <a href="https://invoiceready-air-slate.vercel.app">invoiceready-air-slate.vercel.app</a>
           &nbsp;·&nbsp; Презентация: <a href="https://invoiceready-air-slate.vercel.app/deck.html">/deck.html</a>
         </div>
-        <div class="links">Цель: около 3:00, потолок 5:00.</div>
+        <div class="links">Цель: около 2:15, потолок 5:00.</div>
       </header>
 
       <section class="scene">
@@ -92,38 +90,24 @@
       </section>
 
       <section class="scene">
-        <span class="tag">Сцена 2 · 0:20 to 1:05</span>
-        <h2>Даже фото, и это настоящий AI</h2>
-        <p class="do"><b>На экране:</b> перетаскиваешь заранее подготовленный файл-фото на зону загрузки. Показываешь короткое «Reading your invoice», затем заполненную форму Review. Медленно скроллишь поля: продавец, покупатель, VAT, строки, итоги.</p>
-        <div class="say"><span class="label">Говоришь</span>So I take a photo of a paper invoice and drop it in. The AI reads it straight from the image. Seller, buyer, VAT numbers, line items, totals. But here is the key idea: the AI only reads. It never decides whether the invoice is legal.</div>
-        <p class="note">Если распознавание задержалось, не жди, вырежешь паузу в монтаже. Если нет сети, используй резерв ниже.</p>
-      </section>
-
-      <section class="scene backup">
-        <span class="tag">Сцена 2-бис · резерв</span>
-        <h2>Если нет сети (не записывай, если Сцена 2 прошла)</h2>
-        <p class="do"><b>На экране:</b> вместо перетаскивания нажимаешь карточку «Photo of a paper invoice». Форма открывается мгновенно.</p>
-        <div class="say"><span class="label">Говоришь (убери «straight from the image»)</span>So I take a photo of a paper invoice and drop it in. The AI reads it. Seller, buyer, VAT numbers, line items, totals. But here is the key idea: the AI only reads. It never decides whether the invoice is legal.</div>
+        <span class="tag">Сцена 2 · 0:20 to 1:20</span>
+        <h2>Фото инвойса, и это настоящий AI</h2>
+        <p class="do"><b>На экране, шаг 1:</b> открываешь <code>photo-france.jpg</code> (пробел для Quick Look или двойной клик в Preview). Дай увидеть, что это кривое фото бумажного инвойса с тенями. Закрываешь просмотр.</p>
+        <div class="say"><span class="label">Говоришь</span>This is a paper invoice, photographed on a phone. Crooked, with shadows. The kind of file that is useless to any accounting system today.</div>
+        <p class="do"><b>На экране, шаг 2:</b> перетаскиваешь <code>photo-france.jpg</code> на зону загрузки. Показываешь короткое «Reading your invoice», затем заполненную форму Review. Медленно скроллишь поля. Обрати внимание на зелёный баннер «meets the EN 16931 checks».</p>
+        <div class="say"><span class="label">Говоришь</span>I drop it into InvoiceReady. The AI reads it straight from the image. Seller, buyer, VAT numbers, line items, totals. And it already checked everything against the European standard, EN 16931. The banner is green. It is compliant. Here is the key idea: the AI only reads. Whether the invoice is legal is decided by deterministic rules, in code.</div>
+        <p class="note">Если распознавание задержалось, не жди, вырежешь паузу в монтаже. Если нет сети, вместо перетаскивания нажми карточку «Photo of a paper invoice» и убери из реплики слова «straight from the image».</p>
       </section>
 
       <section class="scene">
-        <span class="tag">Сцена 3 · 1:05 to 1:55</span>
-        <h2>Решают правила, а не AI</h2>
-        <p class="do"><b>На экране:</b> «Convert another» → карточка «Invoice with problems». Дай отрисоваться красным и жёлтым подсказкам. Наведи курсор на поле VAT продавца, затем на итоги.</p>
-        <div class="say"><span class="label">Говоришь</span>Whether it is legal is decided by deterministic rules. Here is an invoice with problems. InvoiceReady checked it against the European standard, EN 16931, and it says, in plain language, what is wrong. A missing VAT number. Totals that do not add up.</div>
-        <p class="do"><b>На экране:</b> жмёшь «Recalculate totals» (арифметика чинится), затем впечатываешь VAT в поле продавца, например <code>PL1234567890</code>. Баннер зеленеет.</p>
-        <div class="say"><span class="label">Говоришь</span>One click recalculates the numbers, I add the missing VAT number, and it turns green. Now it is compliant.</div>
-      </section>
-
-      <section class="scene">
-        <span class="tag">Сцена 4 · 1:55 to 2:35</span>
+        <span class="tag">Сцена 3 · 1:20 to 1:55</span>
         <h2>Результат и стандарты</h2>
         <p class="do"><b>На экране:</b> «Generate e-invoice» → экран Done с зелёным бейджем. Жмёшь «Download UBL XML» (покажи, что файл скачался). Переключаешься на вкладку «UBL XML», чуть скроллишь XML.</p>
         <div class="say"><span class="label">Говоришь</span>Now I download a real e-invoice. UBL, the Peppol standard. Every invoice we generate passes the official EN 16931 and Peppol validators with zero errors. No ERP, no setup, and the file never leaves the browser. Privacy is built in.</div>
       </section>
 
       <section class="scene">
-        <span class="tag">Сцена 5 · 2:35 to 3:00</span>
+        <span class="tag">Сцена 4 · 1:55 to 2:15</span>
         <h2>Финал</h2>
         <p class="do"><b>На экране:</b> возвращаешься на лендинг или показываешь последний слайд презентации (<code>/deck.html</code>, стрелками до конца). Покажи адрес на экране.</p>
         <div class="say"><span class="label">Говоришь</span>Any invoice in. A compliant European e-invoice out. In thirty seconds. InvoiceReady.</div>
@@ -134,8 +118,8 @@
         <h2>Быстрый чек-лист</h2>
         <ul class="check">
           <li>Браузер в тёмной теме, 1080p, чистое окно, уведомления выключены.</li>
-          <li>Файл-фото на рабочем столе (например <code>*.photo.jpg</code> из <code>samples/synthetic</code>).</li>
-          <li>Прогнал весь путь один раз вживую: фото → форма → broken → зелёный → скачивание.</li>
+          <li><code>photo-france.jpg</code> на рабочем столе (папка <code>invoiceready-demo</code>).</li>
+          <li>Прогнал путь один раз: показал фото → перетащил → форма зелёная → скачал XML.</li>
           <li>Звук микрофона включён в записи экрана.</li>
         </ul>
       </section>
