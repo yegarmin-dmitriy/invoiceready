@@ -1,0 +1,43 @@
+{
+  "invoiceNumber": "VDB-2026-3310",
+  "issueDate": "2026-05-18",
+  "dueDate": "2026-06-17",
+  "currency": "USD",
+  "seller": {
+    "name": "Van der Berg Interiors B.V.",
+    "vatId": "NL812345678B01",
+    "address": "Keizersgracht 245",
+    "city": "Amsterdam",
+    "postalCode": "1016 EA",
+    "country": "NL"
+  },
+  "buyer": {
+    "name": "Copperline Studios LLC",
+    "vatId": "US99-1234567",
+    "address": "440 Brannan Street",
+    "city": "San Francisco",
+    "postalCode": "94107",
+    "country": "US"
+  },
+  "lines": [
+    {
+      "description": "Furniture rendering set",
+      "quantity": 20,
+      "unitPrice": 45,
+      "vatRate": 21,
+      "lineTotal": 900
+    },
+    {
+      "description": "Rush delivery fee",
+      "quantity": 1,
+      "unitPrice": 120,
+      "vatRate": 21,
+      "lineTotal": 120
+    }
+  ],
+  "totals": {
+    "net": 1020,
+    "vat": 214.2,
+    "gross": 1234.2
+  }
+}

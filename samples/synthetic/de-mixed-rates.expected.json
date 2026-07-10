@@ -1,0 +1,43 @@
+{
+  "invoiceNumber": "BK-2026-1187",
+  "issueDate": "2026-06-21",
+  "dueDate": "2026-07-21",
+  "currency": "EUR",
+  "seller": {
+    "name": "Blau & Klein Verlag GmbH",
+    "vatId": "DE129273398",
+    "address": "Rosenthaler Straße 40",
+    "city": "Berlin",
+    "postalCode": "10178",
+    "country": "DE"
+  },
+  "buyer": {
+    "name": "Atelier Lumière SARL",
+    "vatId": "FR40303265045",
+    "address": "12 Rue du Faubourg",
+    "city": "Lyon",
+    "postalCode": "69002",
+    "country": "FR"
+  },
+  "lines": [
+    {
+      "description": "Design consulting (per hour)",
+      "quantity": 12,
+      "unitPrice": 95,
+      "vatRate": 19,
+      "lineTotal": 1140
+    },
+    {
+      "description": "Printed catalogue (book, reduced rate)",
+      "quantity": 150,
+      "unitPrice": 8.4,
+      "vatRate": 7,
+      "lineTotal": 1260
+    }
+  ],
+  "totals": {
+    "net": 2400,
+    "vat": 304.8,
+    "gross": 2704.8
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "invoiceNumber": "CN-2026-0006",
+  "issueDate": "2026-07-08",
+  "dueDate": "2026-07-08",
+  "currency": "EUR",
+  "seller": {
+    "name": "Aurora Events s.r.o.",
+    "vatId": "BE0897654321",
+    "address": "Rue Antoine Dansaert 88",
+    "city": "Brussels",
+    "postalCode": "1000",
+    "country": "BE"
+  },
+  "buyer": {
+    "name": "Helios Retail GmbH",
+    "vatId": "DE811569869",
+    "address": "Kurfürstendamm 21",
+    "city": "Berlin",
+    "postalCode": "10719",
+    "country": "DE"
+  },
+  "lines": [
+    {
+      "description": "Refund: cancelled catering (per person)",
+      "quantity": -24,
+      "unitPrice": 18.5,
+      "vatRate": 21,
+      "lineTotal": -444
+    }
+  ],
+  "totals": {
+    "net": -444,
+    "vat": -93.24,
+    "gross": -537.24
+  }
+}

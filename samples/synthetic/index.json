@@ -1,0 +1,84 @@
+[
+  {
+    "id": "pl-domestic-standard",
+    "description": "Poland domestic B2B, single 23% VAT rate, EUR",
+    "docType": "invoice",
+    "country": "PL",
+    "currency": "EUR",
+    "compliant": true,
+    "warnings": [],
+    "files": {
+      "clean": "pl-domestic-standard.clean.png",
+      "scan": "pl-domestic-standard.scan.jpg",
+      "photo": "pl-domestic-standard.photo.jpg",
+      "pdf": "pl-domestic-standard.pdf",
+      "expected": "pl-domestic-standard.expected.json"
+    }
+  },
+  {
+    "id": "de-mixed-rates",
+    "description": "Germany domestic, mixed 19% and 7% VAT rates, EUR",
+    "docType": "invoice",
+    "country": "DE",
+    "currency": "EUR",
+    "compliant": true,
+    "warnings": [],
+    "files": {
+      "clean": "de-mixed-rates.clean.png",
+      "scan": "de-mixed-rates.scan.jpg",
+      "photo": "de-mixed-rates.photo.jpg",
+      "pdf": "de-mixed-rates.pdf",
+      "expected": "de-mixed-rates.expected.json"
+    }
+  },
+  {
+    "id": "fr-intracom-reverse-charge",
+    "description": "France intra-community supply, reverse charge, 0% VAT, EUR",
+    "docType": "invoice",
+    "country": "FR",
+    "currency": "EUR",
+    "compliant": true,
+    "warnings": [],
+    "files": {
+      "clean": "fr-intracom-reverse-charge.clean.png",
+      "scan": "fr-intracom-reverse-charge.scan.jpg",
+      "photo": "fr-intracom-reverse-charge.photo.jpg",
+      "pdf": "fr-intracom-reverse-charge.pdf",
+      "expected": "fr-intracom-reverse-charge.expected.json"
+    }
+  },
+  {
+    "id": "nl-foreign-currency-usd",
+    "description": "Netherlands invoice billed in USD, 21% VAT",
+    "docType": "invoice",
+    "country": "NL",
+    "currency": "USD",
+    "compliant": true,
+    "warnings": [
+      "VAT-FORMAT"
+    ],
+    "files": {
+      "clean": "nl-foreign-currency-usd.clean.png",
+      "scan": "nl-foreign-currency-usd.scan.jpg",
+      "photo": "nl-foreign-currency-usd.photo.jpg",
+      "pdf": "nl-foreign-currency-usd.pdf",
+      "expected": "nl-foreign-currency-usd.expected.json"
+    }
+  },
+  {
+    "id": "be-credit-note",
+    "description": "Belgium credit note, negative amounts, 21% VAT, EUR",
+    "docType": "credit_note",
+    "country": "BE",
+    "currency": "EUR",
+    "compliant": true,
+    "warnings": [],
+    "files": {
+      "clean": "be-credit-note.clean.png",
+      "scan": "be-credit-note.scan.jpg",
+      "photo": "be-credit-note.photo.jpg",
+      "pdf": "be-credit-note.pdf",
+      "expected": "be-credit-note.expected.json"
+    }
+  }
+]

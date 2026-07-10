@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Synthetic invoice renders (regenerate: npx tsx samples/generate.mts)
+samples/synthetic/*.png
+samples/synthetic/*.jpg
+samples/synthetic/*.pdf

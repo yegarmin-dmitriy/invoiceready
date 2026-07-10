@@ -1,0 +1,43 @@
+{
+  "invoiceNumber": "AL-2026-0091",
+  "issueDate": "2026-06-30",
+  "dueDate": "2026-07-30",
+  "currency": "EUR",
+  "seller": {
+    "name": "Atelier Lumière SARL",
+    "vatId": "FR40303265045",
+    "address": "12 Rue du Faubourg",
+    "city": "Lyon",
+    "postalCode": "69002",
+    "country": "FR"
+  },
+  "buyer": {
+    "name": "Van der Berg Interiors B.V.",
+    "vatId": "NL812345678B01",
+    "address": "Keizersgracht 245",
+    "city": "Amsterdam",
+    "postalCode": "1016 EA",
+    "country": "NL"
+  },
+  "lines": [
+    {
+      "description": "Interior lighting design package",
+      "quantity": 1,
+      "unitPrice": 4200,
+      "vatRate": 0,
+      "lineTotal": 4200
+    },
+    {
+      "description": "On-site consultancy (per day)",
+      "quantity": 3,
+      "unitPrice": 750,
+      "vatRate": 0,
+      "lineTotal": 2250
+    }
+  ],
+  "totals": {
+    "net": 6450,
+    "vat": 0,
+    "gross": 6450
+  }
+}

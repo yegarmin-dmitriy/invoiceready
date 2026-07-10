@@ -1,0 +1,43 @@
+{
+  "invoiceNumber": "NW-2026-0042",
+  "issueDate": "2026-07-03",
+  "dueDate": "2026-08-02",
+  "currency": "EUR",
+  "seller": {
+    "name": "Nordwind Studio sp. z o.o.",
+    "vatId": "PL5252445997",
+    "address": "ul. Prosta 51",
+    "city": "Warszawa",
+    "postalCode": "00-838",
+    "country": "PL"
+  },
+  "buyer": {
+    "name": "Helios Retail GmbH",
+    "vatId": "DE811569869",
+    "address": "Kurfürstendamm 21",
+    "city": "Berlin",
+    "postalCode": "10719",
+    "country": "DE"
+  },
+  "lines": [
+    {
+      "description": "Brand identity design",
+      "quantity": 1,
+      "unitPrice": 2400,
+      "vatRate": 23,
+      "lineTotal": 2400
+    },
+    {
+      "description": "Logo animation (10s)",
+      "quantity": 1,
+      "unitPrice": 600,
+      "vatRate": 23,
+      "lineTotal": 600
+    }
+  ],
+  "totals": {
+    "net": 3000,
+    "vat": 690,
+    "gross": 3690
+  }
+}
